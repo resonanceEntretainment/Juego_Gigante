@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a5114542cdfd9bd4d844962b302f3d58
-timeCreated: 1431130807
+timeCreated: 1443715152
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -60,7 +60,7 @@ TextureImporter:
         width: 17
         height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: gigantes_1
       rect:
@@ -70,7 +70,7 @@ TextureImporter:
         width: 17
         height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: gigantes_2
       rect:
