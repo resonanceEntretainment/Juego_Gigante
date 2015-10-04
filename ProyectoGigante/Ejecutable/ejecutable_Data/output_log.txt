@@ -1,0 +1,26 @@
+Initialize engine version: 5.2.0f3 (e7947df39b5c)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [aticfx32.dll 8.17.10.1395]
+    Renderer: AMD Radeon R5 M230
+    Vendor:   ATI
+    VRAM:     2036 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 INTZ=1 NULL=1 RESZ=1 SlowINTZ=1
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\Francisco Javier Sucre Gonzalez (Windows 8)\Dropbox\DELU\Juego Del Gigante\Gigante Rama Sergio\Ejecutable\ejecutable_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\Francisco Javier Sucre Gonzalez (Windows 8)\Dropbox\DELU\Juego Del Gigante\Gigante Rama Sergio\Ejecutable\ejecutable_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\Francisco Javier Sucre Gonzalez (Windows 8)\Dropbox\DELU\Juego Del Gigante\Gigante Rama Sergio\Ejecutable\ejecutable_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading D:\Francisco Javier Sucre Gonzalez (Windows 8)\Dropbox\DELU\Juego Del Gigante\Gigante Rama Sergio\Ejecutable\ejecutable_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: D:\Francisco Javier Sucre Gonzalez (Windows 8)\Dropbox\DELU\Juego Del Gigante\Gigante Rama Sergio\Ejecutable\ejecutable_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\Francisco Javier Sucre Gonzalez (Windows 8)\Dropbox\DELU\Juego Del Gigante\Gigante Rama Sergio\Ejecutable\ejecutable_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\Francisco Javier Sucre Gonzalez (Windows 8)\Dropbox\DELU\Juego Del Gigante\Gigante Rama Sergio\Ejecutable\ejecutable_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\Francisco Javier Sucre Gonzalez (Windows 8)\Dropbox\DELU\Juego Del Gigante\Gigante Rama Sergio\Ejecutable\ejecutable_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: D:\Francisco Javier Sucre Gonzalez (Windows 8)\Dropbox\DELU\Juego Del Gigante\Gigante Rama Sergio\Ejecutable\ejecutable_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.101 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: D:\Francisco Javier Sucre Gonzalez (Windows 8)\Dropbox\DELU\Juego Del Gigante\Gigante Rama Sergio\Ejecutable\ejecutable_Data\Managed\System.dll (this message is harmless)
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 7f4 -> priority: 1 

@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Gigante.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Gigante.cs" Line="18" Column="3" />
+      <File FileName="Assets\Scripts\Cajas.js" Line="7" Column="34" />
+      <File FileName="Assets\Scripts\Boss_1.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Objeto_azul.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Objeto_rojo.js" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
