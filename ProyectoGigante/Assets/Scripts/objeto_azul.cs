@@ -24,7 +24,7 @@ public class objeto_azul : MonoBehaviour
 
         if (coll.gameObject.tag == "PJ")
         {
-            //boss1.GetComponent<Boss_1>().castigar = true;
+            boss1.GetComponent<Boss_1>().castigar = true;
             personaje.GetComponent<Gigante>().agarrado = false;
             personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
             caja.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);

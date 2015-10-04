@@ -32,8 +32,9 @@ public class objeto_rojo : MonoBehaviour
         }
         if (coll.gameObject.tag == "caja")
         {
-            //boss1.GetComponent<Boss_1>().salud = boss1.GetComponent<Boss_1>().salud - 1;
-            //boss1.GetComponent.<Rigidbody2D>().velocity.y = boss1.GetComponent.<Rigidbody2D>().velocity.y + 7;
+            boss1.GetComponent<Boss_1>().salud = boss1.GetComponent<Boss_1>().salud - 1;
+            boss1.GetComponent<Rigidbody2D>().velocity = new Vector2(boss1.GetComponent<Rigidbody2D>().velocity.x,
+                                                                     boss1.GetComponent<Rigidbody2D>().velocity.y + 7);
             Destroy(gameObject);
         }
         if (timer == 0)
