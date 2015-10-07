@@ -1,0 +1,13 @@
+sonidos necesario
+
+1) Un hechizo te hace dano
+2) Un hechizo le hace dano al boss
+	2,1) EL BOSS DICE OUCH
+	2.2) La caja suene como rompiendose pues
+3) Cuando te cae una maldicion
+	3.1) Mueve la caja
+	3.2) Chocas con la pared
+4) Cuando el boss esta molesto o desesperado
+5) Cuando el boss muere
+6) Cuando levantes el cofre
+7) Cuando lances el cofre
