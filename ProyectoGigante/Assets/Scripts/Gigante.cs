@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Gigante : MonoBehaviour
 {
+    
 	public KeyCode movimientoIzq;   //Tecla para que el gigante se mueva a la izquierda
 	public KeyCode movimientoDer;   //Tecla para que el gigante se mueva a la derecha
 	public KeyCode lanzar;		    //Tecla para lanzar la caja
@@ -12,13 +13,16 @@ public class Gigante : MonoBehaviour
 	private bool viendoDer;         //Determinar si el jugador está viendo a la derecha
 	private Rigidbody2D gigante;	//El gigante
 	private GameObject caja;			//La caja
+    public Animator anim;
+    
 
-	void Start () {
+        void Start () {
         caja = GameObject.Find("caja");
         gigante = GetComponent<Rigidbody2D>();
 		agarrado = false;
 		viendoDer = true;
-	}
+        anim = GetComponent<Animator>();
+    }
 
     void Update() {
 
@@ -36,9 +40,10 @@ public class Gigante : MonoBehaviour
                 escala.x *= -1;
                 transform.localScale = escala;
             }
+            anim.SetBool("estacaminando", true);
         }
 
-        if (Input.GetKey(movimientoDer)) {
+        else if (Input.GetKey(movimientoDer)) {
 
             tempVelocity.x = velocidad;
             gigante.velocity = tempVelocity;
@@ -49,7 +54,15 @@ public class Gigante : MonoBehaviour
                 escala.x *= -1;
                 transform.localScale = escala;
             }
+            anim.SetBool("estacaminando", true);
 
+        }
+
+        else
+        {
+            anim.SetBool("estacaminando", false);
+            tempVelocity = new Vector2(0, 0);
+            gigante.velocity = tempVelocity;
         }
 
         //fix para las cajas azules
