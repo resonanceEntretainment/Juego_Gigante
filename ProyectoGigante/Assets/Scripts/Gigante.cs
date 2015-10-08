@@ -68,25 +68,30 @@ public class Gigante : MonoBehaviour
         //fix para las cajas azules
         if (!agarrado)
         {
-            caja.transform.SetParent(null);
-            caja.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
+            anim.SetBool("tieneCaja", false);
+            caja.transform.parent = null;
         }
+
         //
+        else {
+            caja.GetComponent<Rigidbody2D>().velocity = new Vector2(gigante.velocity.x, gigante.velocity.y);
+            caja.transform.localPosition = new Vector2(1.3f, 0f);
+
+        }
 
 		if (agarrado && Input.GetKey(lanzar)){
 			Debug.Log("tercer if ");
 			agarrado = false;
-            caja.transform.SetParent(null);
-			caja.gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
-			if (viendoDer){
+            anim.SetBool("tieneCaja", false);
+            caja.transform.parent = null;
+            if (viendoDer){
 				caja.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2 (fuerzaLanzamiento, 
-				                                                                    2*fuerzaLanzamiento);
+				                                                                    fuerzaLanzamiento/2);
 			}
 			else{
 				caja.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2 (-fuerzaLanzamiento, 
-				                                                                    2*fuerzaLanzamiento);
+				                                                                    fuerzaLanzamiento/2);
 			}
-			caja = null;
 		}
 	}
 
@@ -97,9 +102,9 @@ public class Gigante : MonoBehaviour
 			if (!agarrado){
 				//agarrar caja
 				agarrado = true;
-				Debug.Log("agarrado " + agarrado);
-                caja.transform.SetParent(gigante.transform);
-				caja.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+                anim.SetBool("tieneCaja", true);
+                Debug.Log("agarrado " + agarrado);
+                caja.transform.parent = transform;
 				caja.transform.localPosition = new Vector2(1.3f, 0f);
 			}
 		}
