@@ -41,6 +41,7 @@ public class Boss_1 : MonoBehaviour {
     public int contador_ataque_fin;
     private Rigidbody2D RigidBody2DBoss;
     public int progreso_especial = 0;
+    public Animator anim;
 
 
 
@@ -50,6 +51,7 @@ public class Boss_1 : MonoBehaviour {
         caja = GameObject.Find("caja");
         separacion_castigo = false;
         RigidBody2DBoss = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -62,11 +64,13 @@ public class Boss_1 : MonoBehaviour {
         }
         else if (salud == 1)
         {
+            
             PanicShake();
             if (!panic)
             {
                 //personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(100,personaje.GetComponent<Rigidbody2D>().velocity.y);
                 timer = frecuencia_espasmos;
+                anim.SetBool("Desesperado", true);
                 panic = true;
             }
             if (castigar)
@@ -223,22 +227,26 @@ public class Boss_1 : MonoBehaviour {
             {
                 azules = azules + 1;
                 Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
+                anim.SetBool("Atacando", true);
             }
             else
             {
                 rojos = rojos + 1;
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
+                anim.SetBool("Atacando", true);
             }
         }
         else if ((azules < azules_por_combo) && !(rojos < max_cajas - azules_por_combo))
         {
             azules = azules + 1;
             Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
+            anim.SetBool("Atacando", true);
         }
         else if (!(azules < azules_por_combo) && (rojos < max_cajas - azules_por_combo))
         {
             rojos = rojos + 1;
             Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
+            anim.SetBool("Atacando", true);
         }
         cajas = cajas + 1;
         lanzar = false;
@@ -332,4 +340,11 @@ public class Boss_1 : MonoBehaviour {
             RigidBody2DBoss.velocity = new Vector2(-vel_horizontal, RigidBody2DBoss.velocity.y);
         }
     }
+    void terminarAuch(){
+        anim.SetBool("Herido", false);
+    }
+    void terminarAtaque(){
+        anim.SetBool("Atacando", false);
+    }
+    
 }
