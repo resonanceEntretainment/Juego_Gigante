@@ -22,12 +22,25 @@ public class objeto_azul : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll)
     {
 
-        if (coll.gameObject.tag == "PJ")
+        if ((coll.gameObject.tag == "PJ") 
+            &&(personaje.GetComponent<Gigante>().agarrado == true))
         {
             boss1.GetComponent<Boss_1>().castigar = true;
             personaje.GetComponent<Gigante>().agarrado = false;
-            personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
-            caja.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
+
+	    if (personaje.GetComponent<Gigante>().viendoDer == true){
+                personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
+                caja.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
+            }
+            else {
+                personaje.GetComponent<Gigante>().viendoDer = true;
+                Vector3 escala = personaje.GetComponent<Transform>().localScale;
+                escala.x = -escala.x;
+                personaje.GetComponent<Transform>().localScale = escala;
+                personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
+                caja.GetComponent<Rigidbody2D>().velocity = new Vector2(10, 0);
+            }
+
             Destroy(gameObject);
         }
         if (coll.gameObject.tag == "Piso")

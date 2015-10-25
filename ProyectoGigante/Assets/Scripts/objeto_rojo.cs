@@ -24,6 +24,7 @@ public class objeto_rojo : MonoBehaviour
 
         if (coll.gameObject.tag == "PJ")
         {
+            personaje.GetComponent<Gigante>().salud = personaje.GetComponent<Gigante>().salud - 1;
             Destroy(gameObject);
         }
         if (coll.gameObject.tag == "Piso")

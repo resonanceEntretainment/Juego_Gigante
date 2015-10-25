@@ -64,92 +64,67 @@ public class Boss_1 : MonoBehaviour {
         }
         else if (salud == 1)
         {
-            
-            PanicShake();
-            if (!panic)
+            EstadoDePanico();
+        }
+        else
+        {
+            ComportamientoRegular();
+        }
+    }
+    void ComportamientoRegular(){
+
+        Movimiento();
+        if (!castigar)
+        {
+            separacion_castigo = false;
+            if (ataque_basico)
             {
-                //personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(100,personaje.GetComponent<Rigidbody2D>().velocity.y);
-                timer = frecuencia_espasmos;
-                anim.SetBool("Desesperado", true);
-                panic = true;
-            }
-            if (castigar)
-            {
-                cajas = 0;
-                ataque_basico = true;
                 if (timer <= 0)
                 {
-                    Castigo1();
-                }
-                if (timer <= 0)
-                {
-                    timer = frecuencia_castigo;
+                    if (cajas < max_cajas)
+                    {
+                        RegularAttack();
+                    }
+                    else if (cajas == max_cajas)
+                    {
+                        ataque_basico = false;
+                        timer = duracion_especial;
+                    }
                 }
             }
             else
             {
-                separacion_castigo = false;
-                PanicAttack();
+                SpecialAttack();
+                if (timer <= 0)
+                {
+                    ataque_basico = true;
+                }
+            }
+
+            if (timer <= 0)
+            {
+                timer = frecuencia_cajas;
             }
         }
-        else
+        else if (castigar)
         {
-            Movimiento();
-            if (!castigar)
+            cajas = 0;
+            ataque_basico = true;
+            if (timer <= 0)
             {
-                separacion_castigo = false;
-                if (ataque_basico)
-                {
-                    if (timer <= 0)
-                    {
-                        if (cajas < max_cajas)
-                        {
-                            RegularAttack();
-                        }
-                        else if (cajas == max_cajas)
-                        {
-                            ataque_basico = false;
-                            timer = duracion_especial;
-                        }
-                    }
-                }
-                else
-                {
-                    SpecialAttack();
-                    if (timer <= 0)
-                    {
-                        ataque_basico = true;
-                    }
-                }
-
-                if (timer <= 0)
-                {
-                    timer = frecuencia_cajas;
-                }
+                Castigo1();
             }
-            else if (castigar)
+            if (timer <= 0)
             {
-                cajas = 0;
-                ataque_basico = true;
-                if (timer <= 0)
-                {
-                    Castigo1();
-                }
-                if (timer <= 0)
-                {
-                    timer = frecuencia_castigo;
-                }
+                timer = frecuencia_castigo;
             }
         }
     }
-
     void Castigo1()
     {
 
         if (!separacion_castigo)
         {
-            //personaje.GetComponent.<Rigidbody2D>().velocity.x = -100;
-            //caja.GetComponent.< Rigidbody2D > ().velocity.x = 100;
             separacion_castigo = true;
         }
         if (repeticiones_castigo > 3)
@@ -162,34 +137,47 @@ public class Boss_1 : MonoBehaviour {
 
             if (version_castigo == 0)
             {
-                posicion_spawn = new Vector2(objetivo.transform.position.x - 5, transform.position.y - distancia_spawn_vert);
+                anim.SetBool("Atacando", true);
+                posicion_spawn = new Vector2(objetivo.transform.position.x - 5,
+                transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x - 2, transform.position.y - distancia_spawn_vert);
+                posicion_spawn = new Vector2(objetivo.transform.position.x - 2, 
+                transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x, transform.position.y - distancia_spawn_vert);
+                posicion_spawn = new Vector2(objetivo.transform.position.x,
+                transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x + 2, transform.position.y - distancia_spawn_vert);
+                posicion_spawn = new Vector2(objetivo.transform.position.x + 2, 
+                transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x + 5, transform.position.y - distancia_spawn_vert);
+                posicion_spawn = new Vector2(objetivo.transform.position.x + 5, 
+                transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
                 version_castigo = 1;
             }
             else if (version_castigo == 1)
             {
-                posicion_spawn = new Vector2(objetivo.transform.position.x - 3, transform.position.y - distancia_spawn_vert);
+                anim.SetBool("Atacando", true);
+                posicion_spawn = new Vector2(objetivo.transform.position.x - 3, 
+                transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x - 1, transform.position.y - distancia_spawn_vert);
+                posicion_spawn = new Vector2(objetivo.transform.position.x - 1, 
+                transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x + 1, transform.position.y - distancia_spawn_vert);
+                posicion_spawn = new Vector2(objetivo.transform.position.x + 1, 
+                transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x + 3, transform.position.y - distancia_spawn_vert);
+                posicion_spawn = new Vector2(objetivo.transform.position.x + 3, 
+                transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
                 version_castigo = 0;
             }
         }
         else if (numero_random == 1)
         {
-            posicion_spawn = new Vector2(objetivo.transform.position.x, transform.position.y - distancia_spawn_vert);
+            anim.SetBool("Atacando", true);
+            posicion_spawn = new Vector2(objetivo.transform.position.x,
+            transform.position.y - distancia_spawn_vert);
             Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
         }
         repeticiones_castigo = repeticiones_castigo + 1;
@@ -219,7 +207,8 @@ public class Boss_1 : MonoBehaviour {
     void RegularAttack()
     {
 
-        posicion_spawn = new Vector2(transform.position.x, transform.position.y - distancia_spawn_vert);
+        posicion_spawn = new Vector2(transform.position.x,
+        transform.position.y - distancia_spawn_vert);
         if ((azules < azules_por_combo) && (rojos < max_cajas - azules_por_combo))
         {
             numero_random = Random.Range(0, 2);
@@ -255,25 +244,34 @@ public class Boss_1 : MonoBehaviour {
     void SpecialAttack()
     {
 
-        if ((timer <= duracion_especial)&&(timer >= duracion_especial - frecuencia_especial) && (progreso_especial == 0))
+        if ((timer <= duracion_especial)&&
+        (timer >= duracion_especial - frecuencia_especial) && (progreso_especial == 0))
         {
-            posicion_spawn = new Vector2(personaje.transform.position.x, transform.position.y - distancia_spawn_vert);
+            posicion_spawn = new Vector2(personaje.transform.position.x,
+            transform.position.y - distancia_spawn_vert);
             Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
             progreso_especial = 1;
         }
-        else if ((timer <= duracion_especial - frecuencia_especial)&&((timer >= duracion_especial - frecuencia_especial * 2)) && (progreso_especial == 1))
+        else if ((timer <= duracion_especial - frecuencia_especial)&&
+        ((timer >= duracion_especial - frecuencia_especial * 2)) && (progreso_especial == 1))
         {
-            posicion_spawn = new Vector2(personaje.transform.position.x - 1, transform.position.y - distancia_spawn_vert);
+            posicion_spawn = new Vector2(personaje.transform.position.x - 1, 
+            transform.position.y - distancia_spawn_vert);
             Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
-            posicion_spawn = new Vector2(personaje.transform.position.x + 1, transform.position.y - distancia_spawn_vert);
+            posicion_spawn = new Vector2(personaje.transform.position.x + 1, 
+            transform.position.y - distancia_spawn_vert);
             Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
             progreso_especial = 2;
         }
-        else if ((timer <= duracion_especial - frecuencia_especial * 2) && ((timer >= duracion_especial - frecuencia_especial * 3)) && (progreso_especial == 2))
+        else if ((timer <= duracion_especial - frecuencia_especial * 2)&&
+        ((timer >= duracion_especial - frecuencia_especial * 3))&&
+        (progreso_especial == 2))
         {
-            posicion_spawn = new Vector2(personaje.transform.position.x - 2, transform.position.y - distancia_spawn_vert);
+            posicion_spawn = new Vector2(personaje.transform.position.x - 2,
+            transform.position.y - distancia_spawn_vert);
             Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
-            posicion_spawn = new Vector2(personaje.transform.position.x + 2, transform.position.y - distancia_spawn_vert);
+            posicion_spawn = new Vector2(personaje.transform.position.x + 2, 
+            transform.position.y - distancia_spawn_vert);
             Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
             progreso_especial = 0;
         }
@@ -285,18 +283,52 @@ public class Boss_1 : MonoBehaviour {
     void Movimiento() { 
 
         if (derecha){
-            RigidBody2DBoss.velocity = new Vector2(vel_horizontal, RigidBody2DBoss.velocity.y);    
+            RigidBody2DBoss.velocity = new Vector2(vel_horizontal, 
+            RigidBody2DBoss.velocity.y);    
         }
         else {
-            RigidBody2DBoss.velocity = new Vector2(-vel_horizontal, RigidBody2DBoss.velocity.y);
+            RigidBody2DBoss.velocity = new Vector2(-vel_horizontal, 
+            RigidBody2DBoss.velocity.y);
         }
-        if (((objetivo.transform.position.x + radio_de_seguimiento) <= transform.position.x)){
+        if (((objetivo.transform.position.x + radio_de_seguimiento) 
+            <= transform.position.x)){
             derecha = false;
         }
-        else if (((objetivo.transform.position.x - radio_de_seguimiento) >= transform.position.x)){
+        else if (((objetivo.transform.position.x - radio_de_seguimiento) 
+            >= transform.position.x)){
             derecha = true;
         }
     }
+
+    void EstadoDePanico(){
+
+            PanicShake();
+            if (!panic)
+            {
+                timer = frecuencia_espasmos;
+                anim.SetBool("Desesperado", true);
+                panic = true;
+            }
+            if (castigar)
+            {
+                cajas = 0;
+                ataque_basico = true;
+                if (timer <= 0)
+                {
+                    Castigo1();
+                }
+                if (timer <= 0)
+                {
+                    timer = frecuencia_castigo;
+                }
+            }
+            else
+            {
+                separacion_castigo = false;
+                PanicAttack();
+            }
+    }
+
     void PanicAttack()
     {
         if (timer <= 0)
@@ -333,11 +365,13 @@ public class Boss_1 : MonoBehaviour {
     {
         if (transform.position.x < -0.3)
         {
-            RigidBody2DBoss.velocity = new Vector2(vel_horizontal, RigidBody2DBoss.velocity.y);
+            RigidBody2DBoss.velocity = new Vector2(vel_horizontal,
+            RigidBody2DBoss.velocity.y);
         }
         else if (transform.position.x > 0.3)
         {
-            RigidBody2DBoss.velocity = new Vector2(-vel_horizontal, RigidBody2DBoss.velocity.y);
+            RigidBody2DBoss.velocity = new Vector2(-vel_horizontal, 
+            RigidBody2DBoss.velocity.y);
         }
     }
     void terminarAuch(){
