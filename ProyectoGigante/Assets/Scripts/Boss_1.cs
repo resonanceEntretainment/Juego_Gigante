@@ -134,23 +134,23 @@ public class Boss_1 : MonoBehaviour {
         }
         if (numero_random == 0)
         {
-
+            frecuencia_castigo = 1;
             if (version_castigo == 0)
             {
                 anim.SetBool("Atacando", true);
-                posicion_spawn = new Vector2(objetivo.transform.position.x - 5,
+                posicion_spawn = new Vector2(objetivo.transform.position.x - 6,
                 transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x - 2, 
+                posicion_spawn = new Vector2(objetivo.transform.position.x - 3, 
                 transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
                 posicion_spawn = new Vector2(objetivo.transform.position.x,
                 transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x + 2, 
+                posicion_spawn = new Vector2(objetivo.transform.position.x + 3, 
                 transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x + 5, 
+                posicion_spawn = new Vector2(objetivo.transform.position.x + 6, 
                 transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
                 version_castigo = 1;
@@ -158,29 +158,46 @@ public class Boss_1 : MonoBehaviour {
             else if (version_castigo == 1)
             {
                 anim.SetBool("Atacando", true);
-                posicion_spawn = new Vector2(objetivo.transform.position.x - 3, 
+                posicion_spawn = new Vector2(objetivo.transform.position.x - 4.5f, 
                 transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x - 1, 
+                posicion_spawn = new Vector2(objetivo.transform.position.x - 1.5f, 
                 transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x + 1, 
+                posicion_spawn = new Vector2(objetivo.transform.position.x + 1.5f, 
                 transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                posicion_spawn = new Vector2(objetivo.transform.position.x + 3, 
+                posicion_spawn = new Vector2(objetivo.transform.position.x + 4.5f, 
                 transform.position.y - distancia_spawn_vert);
                 Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
                 version_castigo = 0;
             }
+            repeticiones_castigo = repeticiones_castigo + 1;
         }
         else if (numero_random == 1)
         {
-            anim.SetBool("Atacando", true);
-            posicion_spawn = new Vector2(objetivo.transform.position.x,
-            transform.position.y - distancia_spawn_vert);
-            Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
+            frecuencia_castigo = 0.2f;
+            if (version_castigo < 4){
+                anim.SetBool("Atacando", true);
+                posicion_spawn = new Vector2(objetivo.transform.position.x
+                + 3*version_castigo - 6, transform.position.y - distancia_spawn_vert);
+                Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
+                version_castigo += 1;
+            }
+            else if ((version_castigo >= 4)&&(version_castigo < 7)){
+                anim.SetBool("Atacando", true);
+                posicion_spawn = new Vector2(objetivo.transform.position.x
+                - (3*version_castigo - 3) + 12, transform.position.y - distancia_spawn_vert);
+                Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
+                version_castigo += 1;
+            }
+            else if (version_castigo == 7){
+                repeticiones_castigo += 1;
+                version_castigo = 0;
+                
+            }
         }
-        repeticiones_castigo = repeticiones_castigo + 1;
+        
     }
     void Bounce()
     {

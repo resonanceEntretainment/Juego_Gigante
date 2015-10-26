@@ -27,6 +27,8 @@ public class objeto_azul : MonoBehaviour
         {
             boss1.GetComponent<Boss_1>().castigar = true;
             personaje.GetComponent<Gigante>().agarrado = false;
+            personaje.GetComponent<Gigante>().timer = 1;
+            personaje.GetComponent<Gigante>().empujado = true;
 
 	    if (personaje.GetComponent<Gigante>().viendoDer == true){
                 personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
