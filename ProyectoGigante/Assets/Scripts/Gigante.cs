@@ -7,15 +7,17 @@ public class Gigante : MonoBehaviour
     public KeyCode movimientoIzq;   //Tecla para que el gigante se mueva a la izquierda
     public KeyCode movimientoDer;   //Tecla para que el gigante se mueva a la derecha
     public KeyCode lanzar;		    //Tecla para lanzar la caja
-    public float velocidad;         //Velocidad a la que se moverá la caja
+    public float velocidad;         //Velocidad a la que se moverá el gigante
     public float fuerzaLanzamiento; //Fuerza con la que se lanzará la caja
     public bool agarrado;			//Determinar si está sosteniendo la caja
     public bool viendoDer;         //Determinar si el jugador está viendo a la derecha
     public bool empujado;
+    public bool muerteDetectada;
     public int salud;              //Salud del gigante
     public float timer;
     private Rigidbody2D gigante;	//El gigante
     private GameObject caja;			//La caja
+    private Vector2 velocidadCero;
     public Animator anim;
     
 
@@ -27,12 +29,17 @@ public class Gigante : MonoBehaviour
         empujado = false;
         salud = 3;
         anim = GetComponent<Animator>();
+        velocidadCero.x = 0;
+        velocidadCero.y = 0;
     }
 
     void Update() {
 
         if (salud>0){
             ComportamientoGiganteNormal();
+        }
+        else{
+            Derrotado();
         }
     }
     void ComportamientoGiganteNormal(){
@@ -134,6 +141,20 @@ public class Gigante : MonoBehaviour
     }
     
     void Derrotado(){
+        if (!muerteDetectada){
+            muerteDetectada = true;
+            timer = 3;
+        }
+        else{
+            timer -= Time.deltaTime;
+            gigante.velocity = velocidadCero;
+            if (timer < 0){
+                Destroy(gameObject);
+            }
+        }
+    }
+    void Reinicializar(){
+        
 
     }
 }
