@@ -47,6 +47,7 @@ public class Boss_1 : MonoBehaviour {
 
     void Start()
     {
+        objetivo = GameObject.Find("BossOrbita");
         personaje = GameObject.Find("Gigante");
         caja = GameObject.Find("caja");
         separacion_castigo = false;

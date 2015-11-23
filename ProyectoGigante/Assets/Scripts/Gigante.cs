@@ -17,16 +17,20 @@ public class Gigante : MonoBehaviour
     public float timer;
     private Rigidbody2D gigante;	//El gigante
     private GameObject caja;			//La caja
+    private GameObject ControlDelNivel;
     private Vector2 velocidadCero;
+    private bool señalDeDerrota;
     public Animator anim;
     
 
     void Start () {
         caja = GameObject.Find("caja");
+        ControlDelNivel = GameObject.Find("ControlDelJuego");
         gigante = GetComponent<Rigidbody2D>();
         agarrado = false;
         viendoDer = true;
         empujado = false;
+        señalDeDerrota = false;
         salud = 3;
         anim = GetComponent<Animator>();
         velocidadCero.x = 0;
@@ -148,8 +152,9 @@ public class Gigante : MonoBehaviour
         else{
             timer -= Time.deltaTime;
             gigante.velocity = velocidadCero;
-            if (timer < 0){
-                Destroy(gameObject);
+            if ((timer < 0)&&(!señalDeDerrota)){
+                ControlDelNivel.GetComponent<ControlDelNivel>().Derrota = true;
+                señalDeDerrota = true;
             }
         }
     }

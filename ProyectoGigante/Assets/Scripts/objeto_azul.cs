@@ -45,6 +45,12 @@ public class objeto_azul : MonoBehaviour
 
             Destroy(gameObject);
         }
+        else if ((coll.gameObject.tag == "PJ") 
+            &&(personaje.GetComponent<Gigante>().agarrado == false))
+        {
+            Destroy(gameObject);
+        }
+
         if (coll.gameObject.tag == "Piso")
         {
             Destroy(gameObject);
