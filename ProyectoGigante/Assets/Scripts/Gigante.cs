@@ -147,6 +147,8 @@ public class Gigante : MonoBehaviour
     void Derrotado(){
         if (!muerteDetectada){
             muerteDetectada = true;
+            anim.SetBool("estacaminando", false);
+            anim.SetBool("tieneCaja", false);
             timer = 3;
         }
         else{

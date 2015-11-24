@@ -38,7 +38,8 @@ public class Boss_1 : MonoBehaviour {
     public int repeticiones_castigo = 4;
     public bool separacion_castigo;
     public bool panic = false;
-    public int contador_ataque_fin;
+    public int contador_ataques;
+    public int numero_de_balas;
     private Rigidbody2D RigidBody2DBoss;
     public int progreso_especial = 0;
     public Animator anim;
@@ -323,6 +324,7 @@ public class Boss_1 : MonoBehaviour {
             PanicShake();
             if (!panic)
             {
+                objeto_azul.GetComponent<objeto_azul>().Empujar(personaje, caja);
                 timer = frecuencia_espasmos;
                 anim.SetBool("Desesperado", true);
                 panic = true;
@@ -352,28 +354,20 @@ public class Boss_1 : MonoBehaviour {
         if (timer <= 0)
         {
             RigidBody2DBoss.velocity = new Vector2(RigidBody2DBoss.velocity.y, 10);
-            for (var i = 10; i >= 0; i--)
+            posicion_spawn = new Vector2(10 - contador_ataques, transform.position.y - distancia_spawn_vert);
+            if (contador_ataques == 0)
             {
-                Debug.Log("Entre en el fooooor");
-                if (contador_ataque_fin == i)
-                {
-                    posicion_spawn = new Vector2(5 - i, transform.position.y - distancia_spawn_vert);
-                    if (i == 0)
-                    {
-                        Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
-                        contador_ataque_fin = contador_ataque_fin + 1;
-                    }
-                    else
-                    {
-                        Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
-                        contador_ataque_fin = contador_ataque_fin + 1;
-                    }
-                    if (i == 10)
-                    {
-                        contador_ataque_fin = 0;
-                    }
-                    break;
-                }
+                Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
+                contador_ataques = contador_ataques + 1;
+            }
+            else if ((contador_ataques > 0)&&(contador_ataques < numero_de_balas))
+            {
+                Instantiate(objeto_azul, posicion_spawn, Quaternion.identity);
+                contador_ataques = contador_ataques + 1;
+            }
+            else if (contador_ataques == numero_de_balas)
+            {
+                contador_ataques = 0;
             }
             timer = frecuencia_espasmos;
 
