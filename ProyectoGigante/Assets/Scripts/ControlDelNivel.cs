@@ -41,7 +41,7 @@ public class ControlDelNivel : MonoBehaviour {
                 Destroy(Caja);
                 Destruido = true;
             }
-            if (timer < 0){
+            else if ((Destruido)&&(timer < 0)){
 
                 posicion_spawn = new Vector2(-8.67f,1.5f);
                 Gigante = (GameObject)Instantiate(PrefabGigante,posicion_spawn,Quaternion.identity);
