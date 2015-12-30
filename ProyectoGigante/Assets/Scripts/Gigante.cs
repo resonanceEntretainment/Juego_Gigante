@@ -15,6 +15,7 @@ public class Gigante : MonoBehaviour
     public bool muerteDetectada;
     public int salud;              //Salud del gigante
     public float timer;
+    public bool ArribaDeLaCabeza;
     private Rigidbody2D gigante;	//El gigante
     private GameObject caja;			//La caja
     private GameObject ControlDelNivel;
@@ -35,6 +36,7 @@ public class Gigante : MonoBehaviour
         anim = GetComponent<Animator>();
         velocidadCero.x = 0;
         velocidadCero.y = 0;
+        ArribaDeLaCabeza = false;
     }
 
     void Update() {
@@ -49,10 +51,49 @@ public class Gigante : MonoBehaviour
     void ComportamientoGiganteNormal(){
 
         if (!empujado){
-            Vector2 tempVelocity; //Variable temporal para asignar la velocidad
-            tempVelocity = gigante.velocity;
+            //Codigo para moverse
+            MovimientoRegular();
+            //Codigo para agarrar la caja
+            ControlDeLaCaja();
+            //Codigo para levantar caja
+            LevantarLaCaja();
+            //Codigo para lanzar la caja
+            LanzamientoDeLaCaja();
+        }
+        else {
+            ControlDeLaCaja();
+            LevantarLaCaja();
+            gigante.velocity = new Vector2(-10,0);
+            if (timer <= 0){
+                empujado = false;
+            }
+            else {
+                timer -= Time.deltaTime;
+            }
+        }
+    }
+    void OnCollisionEnter2D(Collision2D coll) {
 
-            if (Input.GetKey(movimientoIzq)) {
+        if (coll.gameObject.tag == "caja"){
+            Debug.Log("agarrado " + agarrado);
+            if (!agarrado){
+                //agarrar caja
+                agarrado = true;
+                anim.SetBool("tieneCaja", true);
+                Debug.Log("agarrado " + agarrado);
+                caja.transform.parent = transform;
+                caja.transform.localPosition = new Vector2(1.3f, 0.3f);
+            }
+        }
+        if (coll.gameObject.tag == "Pared"){
+            empujado = false;
+        }
+    }
+    
+    void MovimientoRegular(){
+        Vector2 tempVelocity; //Variable temporal para asignar la velocidad
+        tempVelocity = gigante.velocity;
+        if (Input.GetKey(movimientoIzq)) {
 
                 tempVelocity.x = -velocidad;
                 gigante.velocity = tempVelocity;
@@ -86,64 +127,55 @@ public class Gigante : MonoBehaviour
                 tempVelocity = new Vector2(0, 0);
                 gigante.velocity = tempVelocity;
             }
-
-            //fix para las cajas azules
-            if (!agarrado)
-            {
+    }
+    void ControlDeLaCaja(){
+        if(ArribaDeLaCabeza){
+            if (!agarrado){
                 anim.SetBool("tieneCaja", false);
                 caja.transform.parent = null;
             }
-
-            //
             else {
                 caja.GetComponent<Rigidbody2D>().velocity = new Vector2
                 (gigante.velocity.x, gigante.velocity.y);
-                caja.transform.localPosition = new Vector2(1.3f, 0f);
+                caja.transform.localPosition = new Vector2(0.5f, 2f);
             }
-
-            if (agarrado && Input.GetKey(lanzar)){
-                Debug.Log("tercer if ");
-                agarrado = false;
+        }
+        else{
+            if (!agarrado){
                 anim.SetBool("tieneCaja", false);
                 caja.transform.parent = null;
-                if (viendoDer){
-                    caja.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2 (fuerzaLanzamiento, 
-		                                                                    fuerzaLanzamiento/2);
-                }
-                else{
-                    caja.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2 (-fuerzaLanzamiento, 
-		                                                                    fuerzaLanzamiento/2);
-                }
-            }
-        }
-        else {
-            gigante.velocity = new Vector2(-10,0);
-            if (timer <= 0){
-                empujado = false;
             }
             else {
-                timer -= Time.deltaTime;
+                caja.GetComponent<Rigidbody2D>().velocity = new Vector2
+                (gigante.velocity.x, gigante.velocity.y);
+                caja.transform.localPosition = new Vector2(1.3f, 0.3f);
             }
         }
     }
-    void OnCollisionEnter2D(Collision2D coll) {
-
-        if (coll.gameObject.tag == "caja"){
-            Debug.Log("agarrado " + agarrado);
-            if (!agarrado){
-                //agarrar caja
-                agarrado = true;
-                anim.SetBool("tieneCaja", true);
-                Debug.Log("agarrado " + agarrado);
-                caja.transform.parent = transform;
-                caja.transform.localPosition = new Vector2(1.3f, 0f);
+    void LevantarLaCaja(){
+        if (Input.GetButtonDown("LevantarCaja")){
+            ArribaDeLaCabeza=true;
+        }
+        else if(Input.GetButtonDown("BajarCaja")){
+            ArribaDeLaCabeza=false;
+        }
+    } 
+    void LanzamientoDeLaCaja(){
+        if (agarrado && Input.GetKey(lanzar)){
+            Debug.Log("tercer if ");
+            agarrado = false;
+            anim.SetBool("tieneCaja", false);
+            caja.transform.parent = null;
+            if (viendoDer){
+                caja.gameObject.GetComponent<Rigidbody2D>().velocity = 
+                new Vector2 (fuerzaLanzamiento, fuerzaLanzamiento/2);
+            }
+            else{
+                caja.gameObject.GetComponent<Rigidbody2D>().velocity =
+                new Vector2 (-fuerzaLanzamiento,fuerzaLanzamiento/2);
             }
         }
-        if (coll.gameObject.tag == "Pared"){
-            empujado = false;
-        }
     }
-    
     void Derrotado(){
         if (!muerteDetectada){
             muerteDetectada = true;

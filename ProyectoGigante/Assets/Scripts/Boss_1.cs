@@ -43,6 +43,8 @@ public class Boss_1 : MonoBehaviour {
     private Rigidbody2D RigidBody2DBoss;
     public int progreso_especial = 0;
     public Animator anim;
+    public bool Intro = true;
+    public GameObject ataqueDiagonal;
 
 
 
@@ -54,23 +56,39 @@ public class Boss_1 : MonoBehaviour {
         separacion_castigo = false;
         RigidBody2DBoss = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        timer = 2;
     }
 
     void Update()
     {
-        timer -= Time.deltaTime;
         Bounce();
-        if (salud <= 0)
-        {
-            Destroy(gameObject);
+        timer -= Time.deltaTime;
+        if (Intro){
+            transform.position = new Vector2(0, 
+            transform.position.y);
+            objeto_azul.GetComponent<objeto_azul>().Empujar(personaje, caja);
+            if (timer<0){
+                posicion_spawn = new Vector2(transform.position.x,
+                transform.position.y - distancia_spawn_vert);
+                ataqueDiagonal = (GameObject)Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
+                anim.SetBool("Atacando", true);
+                ataqueDiagonal.GetComponent<objeto_rojo>().diagonal = true;
+                Intro = false;
+            }
         }
-        else if (salud == 1)
-        {
-            EstadoDePanico();
-        }
-        else
-        {
-            ComportamientoRegular();
+        else{
+            if (salud <= 0)
+            {
+                Destroy(gameObject);
+            }
+            else if (salud == 1)
+            {
+                EstadoDePanico();
+            }
+            else
+            {
+                ComportamientoRegular();
+            }
         }
     }
     void ComportamientoRegular(){

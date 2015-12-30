@@ -6,9 +6,12 @@ public class objeto_rojo : MonoBehaviour
     public GameObject boss1;
     public GameObject personaje;
     public GameObject caja;
+    private Rigidbody2D ObjetoRojo;
     public float timer;
+    public bool diagonal = false;
     void Start()
     {
+        ObjetoRojo = GetComponent<Rigidbody2D>();
         timer = 20;
         boss1 = GameObject.Find("boss1");
         personaje = GameObject.Find("Gigante");
@@ -17,6 +20,13 @@ public class objeto_rojo : MonoBehaviour
 
     void Update()
     {
+        Vector2 tempVelocity; //Variable temporal para asignar la velocidad
+        tempVelocity = ObjetoRojo.velocity;
+        if (diagonal){
+            tempVelocity.x = -9;
+            tempVelocity.y = -7f;
+            ObjetoRojo.velocity = tempVelocity;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D coll)

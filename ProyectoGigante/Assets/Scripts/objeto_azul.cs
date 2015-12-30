@@ -73,7 +73,6 @@ public class objeto_azul : MonoBehaviour
         Personaje.GetComponent<Gigante>().timer = 1;
         Personaje.GetComponent<Gigante>().empujado = true;
         Personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
-        Caja.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
 
     }
 }
