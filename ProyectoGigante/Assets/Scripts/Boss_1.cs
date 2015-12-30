@@ -45,6 +45,7 @@ public class Boss_1 : MonoBehaviour {
     public Animator anim;
     public bool Intro = true;
     public GameObject ataqueDiagonal;
+    public int SecuenciaIntro = 0;
 
 
 
@@ -67,12 +68,16 @@ public class Boss_1 : MonoBehaviour {
             transform.position = new Vector2(0, 
             transform.position.y);
             objeto_azul.GetComponent<objeto_azul>().Empujar(personaje, caja);
-            if (timer<0){
+            if ((SecuenciaIntro == 0)&&(timer<0)){
                 posicion_spawn = new Vector2(transform.position.x,
                 transform.position.y - distancia_spawn_vert);
                 ataqueDiagonal = (GameObject)Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
                 anim.SetBool("Atacando", true);
                 ataqueDiagonal.GetComponent<objeto_rojo>().diagonal = true;
+                SecuenciaIntro = 1;
+                timer = 2;
+            }
+            else if ((SecuenciaIntro == 1)&&(timer<0)){
                 Intro = false;
             }
         }
