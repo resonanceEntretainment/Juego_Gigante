@@ -68,11 +68,23 @@ public class objeto_azul : MonoBehaviour
         }
     }
 
-    public void Empujar(GameObject Personaje,GameObject Caja){
+    public void Empujar(GameObject Personaje,GameObject Caja,bool timed){
 
-        Personaje.GetComponent<Gigante>().timer = 1;
-        Personaje.GetComponent<Gigante>().empujado = true;
-        Personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
+        if (!timed){
+            Personaje.GetComponent<Gigante>().anim.SetBool("estacaminando", false);
+            Personaje.GetComponent<Gigante>().empujado = true;
+            Personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
+        }
+        else{
+            Personaje.GetComponent<Gigante>().anim.SetBool("estacaminando", false);
+            Personaje.GetComponent<Gigante>().empujado = true;
+            Personaje.GetComponent<Gigante>().timer = 2;
+            Personaje.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
+        }
+    }
+    public void Detener(GameObject Personaje){
 
+            Personaje.GetComponent<Gigante>().anim.SetBool("estacaminando", false);
+            Personaje.GetComponent<Gigante>().detenido = true;
     }
 }

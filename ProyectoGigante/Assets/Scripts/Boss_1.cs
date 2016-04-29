@@ -46,7 +46,8 @@ public class Boss_1 : MonoBehaviour {
     public bool Intro = true;
     public GameObject ataqueDiagonal;
     public int SecuenciaIntro = 0;
-
+    public bool EmpujonPanicoNecesario = false;
+    public bool CastigoCancelado = false;
 
 
     void Start()
@@ -57,7 +58,7 @@ public class Boss_1 : MonoBehaviour {
         separacion_castigo = false;
         RigidBody2DBoss = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        timer = 2;
+        timer = 3;
     }
 
     void Update()
@@ -67,15 +68,22 @@ public class Boss_1 : MonoBehaviour {
         if (Intro){
             transform.position = new Vector2(0, 
             transform.position.y);
-            objeto_azul.GetComponent<objeto_azul>().Empujar(personaje, caja);
+            //Inmovilización del personaje
+            if(personaje.GetComponent<Gigante>().chocoConPared == false){
+                objeto_azul.GetComponent<objeto_azul>().Empujar(personaje, caja,false);
+            }
+            if((personaje.GetComponent<Gigante>().chocoConPared == true)){
+                objeto_azul.GetComponent<objeto_azul>().Detener(personaje);
+            }
+            //Codigo para la primera pelota negra del boss
             if ((SecuenciaIntro == 0)&&(timer<0)){
-                posicion_spawn = new Vector2(transform.position.x,
-                transform.position.y - distancia_spawn_vert);
+                posicion_spawn = new Vector2(0,
+                8.2f);
                 ataqueDiagonal = (GameObject)Instantiate(objeto_rojo, posicion_spawn, Quaternion.identity);
                 anim.SetBool("Atacando", true);
                 ataqueDiagonal.GetComponent<objeto_rojo>().diagonal = true;
                 SecuenciaIntro = 1;
-                timer = 2;
+                timer = 3;
             }
             else if ((SecuenciaIntro == 1)&&(timer<0)){
                 Intro = false;
@@ -84,6 +92,7 @@ public class Boss_1 : MonoBehaviour {
         else{
             if (salud <= 0)
             {
+                ClearBullets();
                 Destroy(gameObject);
             }
             else if (salud == 1)
@@ -101,6 +110,10 @@ public class Boss_1 : MonoBehaviour {
         Movimiento();
         if (!castigar)
         {
+            if(CastigoCancelado){
+                ClearBullets();
+                CastigoCancelado = false;
+            }
             separacion_castigo = false;
             if (ataque_basico)
             {
@@ -347,13 +360,18 @@ public class Boss_1 : MonoBehaviour {
             PanicShake();
             if (!panic)
             {
-                objeto_azul.GetComponent<objeto_azul>().Empujar(personaje, caja);
+                ClearBullets();
+                objeto_azul.GetComponent<objeto_azul>().Empujar(personaje, caja,true);
                 timer = frecuencia_espasmos;
                 anim.SetBool("Desesperado", true);
                 panic = true;
             }
             if (castigar)
             {
+                if(!EmpujonPanicoNecesario){
+                    ClearBullets();
+                    EmpujonPanicoNecesario = true; 
+                }
                 cajas = 0;
                 ataque_basico = true;
                 if (timer <= 0)
@@ -367,6 +385,11 @@ public class Boss_1 : MonoBehaviour {
             }
             else
             {
+                if(EmpujonPanicoNecesario){
+                    objeto_azul.GetComponent<objeto_azul>().Empujar(personaje, caja,true);
+                    ClearBullets();
+                    EmpujonPanicoNecesario = false;
+                }
                 separacion_castigo = false;
                 PanicAttack();
             }
@@ -415,5 +438,14 @@ public class Boss_1 : MonoBehaviour {
     void terminarAtaque(){
         anim.SetBool("Atacando", false);
     }
-    
+    void ClearBullets(){
+        GameObject[] BalasRojas = GameObject.FindGameObjectsWithTag("Objeto Rojo");
+        GameObject[] BalasAzules = GameObject.FindGameObjectsWithTag("Objeto Azul");
+        foreach (GameObject target in BalasRojas) {
+            GameObject.Destroy(target);
+        }
+        foreach (GameObject target in BalasAzules) {
+            GameObject.Destroy(target);
+        }
+    }
 }

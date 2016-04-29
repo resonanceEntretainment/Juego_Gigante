@@ -16,6 +16,10 @@ public class Gigante : MonoBehaviour
     public int salud;              //Salud del gigante
     public float timer;
     public bool ArribaDeLaCabeza;
+    public bool tomoDanno = false;
+    public bool seRecupero = false;
+    public bool detenido = false;
+    public bool chocoConPared = false;
     private Rigidbody2D gigante;	//El gigante
     private GameObject caja;			//La caja
     private GameObject ControlDelNivel;
@@ -37,11 +41,23 @@ public class Gigante : MonoBehaviour
         velocidadCero.x = 0;
         velocidadCero.y = 0;
         ArribaDeLaCabeza = false;
+        detenido = false;
     }
 
     void Update() {
-
         if (salud>0){
+            if (tomoDanno){
+                anim.SetBool("tomoDanno", true);
+                tomoDanno = false;
+                seRecupero = true;
+            }
+            else{
+                if (seRecupero){
+                    Debug.Log("Si entro a la cosa");
+                    anim.SetBool("tomoDanno", false);
+                    seRecupero = false;
+                }
+            }
             ComportamientoGiganteNormal();
         }
         else{
@@ -51,42 +67,58 @@ public class Gigante : MonoBehaviour
     void ComportamientoGiganteNormal(){
 
         if (!empujado){
-            //Codigo para moverse
-            MovimientoRegular();
-            //Codigo para agarrar la caja
-            ControlDeLaCaja();
-            //Codigo para levantar caja
-            LevantarLaCaja();
-            //Codigo para lanzar la caja
-            LanzamientoDeLaCaja();
+            if (detenido){
+                //*****************************//
+                //Espera para la primera pelota//
+                //*****************************//
+                MirarALaDer();
+                ControlDeLaCaja();
+                LevantarLaCaja();
+                detenido = false;
+            }
+            else{
+                //******************//
+                //Movimiento regular//
+                //******************//
+                //Codigo para moverse
+                MovimientoRegular();
+                //Codigo para agarrar la caja
+                ControlDeLaCaja();
+                //Codigo para levantar caja
+                LevantarLaCaja();
+                //Codigo para lanzar la caja
+                LanzamientoDeLaCaja();
+            }
         }
         else {
+            //******************//
+            //     Empujado     //
+            //******************//
+            anim.SetBool("esEmpujado", true);
+            MirarALaDer();
             ControlDeLaCaja();
             LevantarLaCaja();
             gigante.velocity = new Vector2(-10,0);
-            if (timer <= 0){
-                empujado = false;
-            }
-            else {
-                timer -= Time.deltaTime;
-            }
+
         }
     }
     void OnCollisionEnter2D(Collision2D coll) {
 
         if (coll.gameObject.tag == "caja"){
-            Debug.Log("agarrado " + agarrado);
             if (!agarrado){
                 //agarrar caja
                 agarrado = true;
                 anim.SetBool("tieneCaja", true);
-                Debug.Log("agarrado " + agarrado);
                 caja.transform.parent = transform;
                 caja.transform.localPosition = new Vector2(1.3f, 0.3f);
             }
         }
         if (coll.gameObject.tag == "Pared"){
+            Debug.Log("ChocoConPared");
+            chocoConPared = true;
+            anim.SetBool("esEmpujado", false);
             empujado = false;
+            detenido = true;
         }
     }
     
@@ -97,13 +129,7 @@ public class Gigante : MonoBehaviour
 
                 tempVelocity.x = -velocidad;
                 gigante.velocity = tempVelocity;
-                if (viendoDer)
-                {
-                    viendoDer = false;
-                    Vector3 escala = transform.localScale;
-                    escala.x *= -1;
-                    transform.localScale = escala;
-                }
+                MirarALaIzq();
                 anim.SetBool("estacaminando", true);
             }
 
@@ -111,13 +137,7 @@ public class Gigante : MonoBehaviour
 
                 tempVelocity.x = velocidad;
                 gigante.velocity = tempVelocity;
-                if (!viendoDer)
-                {
-                    viendoDer = true;
-                    Vector3 escala = transform.localScale;
-                    escala.x *= -1;
-                    transform.localScale = escala;
-                }
+                MirarALaDer();
                 anim.SetBool("estacaminando", true);
             }
 
@@ -127,6 +147,22 @@ public class Gigante : MonoBehaviour
                 tempVelocity = new Vector2(0, 0);
                 gigante.velocity = tempVelocity;
             }
+    }
+    void MirarALaIzq(){
+        if (viendoDer){
+            viendoDer = false;
+            Vector3 escala = transform.localScale;
+            escala.x *= -1;
+            transform.localScale = escala;
+        }
+    }
+    void MirarALaDer(){
+        if (!viendoDer){
+            viendoDer = true;
+            Vector3 escala = transform.localScale;
+            escala.x *= -1;
+            transform.localScale = escala;
+        }
     }
     void ControlDeLaCaja(){
         if(ArribaDeLaCabeza){
@@ -162,7 +198,6 @@ public class Gigante : MonoBehaviour
     } 
     void LanzamientoDeLaCaja(){
         if (agarrado && Input.GetKey(lanzar)){
-            Debug.Log("tercer if ");
             agarrado = false;
             anim.SetBool("tieneCaja", false);
             caja.transform.parent = null;
@@ -173,6 +208,9 @@ public class Gigante : MonoBehaviour
             else{
                 caja.gameObject.GetComponent<Rigidbody2D>().velocity =
                 new Vector2 (-fuerzaLanzamiento,fuerzaLanzamiento/2);
+            }
+            if (ControlDelNivel.GetComponent<ControlDelNivel>().Tutorial == 1){
+                ControlDelNivel.GetComponent<ControlDelNivel>().Tutorial = 2;
             }
         }
     }

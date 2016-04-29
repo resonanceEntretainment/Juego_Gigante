@@ -23,8 +23,8 @@ public class objeto_rojo : MonoBehaviour
         Vector2 tempVelocity; //Variable temporal para asignar la velocidad
         tempVelocity = ObjetoRojo.velocity;
         if (diagonal){
-            tempVelocity.x = -9;
-            tempVelocity.y = -7f;
+            tempVelocity.x = -5.8f;
+            tempVelocity.y = -3.5f;
             ObjetoRojo.velocity = tempVelocity;
         }
     }
@@ -35,6 +35,7 @@ public class objeto_rojo : MonoBehaviour
         if (coll.gameObject.tag == "PJ")
         {
             personaje.GetComponent<Gigante>().salud = personaje.GetComponent<Gigante>().salud - 1;
+            personaje.GetComponent<Gigante>().tomoDanno = true;
             Destroy(gameObject);
         }
         if (coll.gameObject.tag == "Piso")
