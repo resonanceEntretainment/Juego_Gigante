@@ -82,12 +82,14 @@ public class Gigante : MonoBehaviour
                 //******************//
                 //Codigo para moverse
                 MovimientoRegular();
-                //Codigo para agarrar la caja
-                ControlDeLaCaja();
-                //Codigo para levantar caja
-                LevantarLaCaja();
-                //Codigo para lanzar la caja
-                LanzamientoDeLaCaja();
+                if (!(caja == null)){
+                    //Codigo para agarrar la caja
+                    ControlDeLaCaja();
+                    //Codigo para levantar caja
+                    LevantarLaCaja();
+                    //Codigo para lanzar la caja
+                    LanzamientoDeLaCaja();
+                }
             }
         }
         else {
@@ -131,22 +133,22 @@ public class Gigante : MonoBehaviour
                 gigante.velocity = tempVelocity;
                 MirarALaIzq();
                 anim.SetBool("estacaminando", true);
-            }
-
-            else if (Input.GetKey(movimientoDer)) {
+        }
+        else if (Input.GetKey(movimientoDer)) {
 
                 tempVelocity.x = velocidad;
                 gigante.velocity = tempVelocity;
                 MirarALaDer();
                 anim.SetBool("estacaminando", true);
-            }
-
-            else
-            {
+        }
+        else
+        {
+            if (!(tempVelocity.x == 0)){
                 anim.SetBool("estacaminando", false);
                 tempVelocity = new Vector2(0, 0);
                 gigante.velocity = tempVelocity;
             }
+        }
     }
     void MirarALaIzq(){
         if (viendoDer){

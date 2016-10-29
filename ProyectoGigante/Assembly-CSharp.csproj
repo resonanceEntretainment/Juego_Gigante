@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Boss_1.cs" />
      <Compile Include="Assets\Scripts\Cajas.cs" />
+     <Compile Include="Assets\Scripts\ControlDelIntro.cs" />
      <Compile Include="Assets\Scripts\ControlDelNivel.cs" />
      <Compile Include="Assets\Scripts\Gigante.cs" />
      <Compile Include="Assets\Scripts\Pensamiento.cs" />

@@ -6,21 +6,25 @@ Direct3D:
     Vendor:   Intel
     VRAM:     128 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Sergio\Dropbox\Programacion juegos\Juego Gigante\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Sergio\Dropbox\Programacion juegos\Juego Gigante\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Sergio\Dropbox\Programacion juegos\Juego Gigante\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Sergio\Dropbox\Programacion juegos\Juego Gigante\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Sergio\Dropbox\Programacion juegos\Juego Gigante\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Sergio\Dropbox\Programacion juegos\Juego Gigante\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\Sergio\Dropbox\Programacion juegos\Juego Gigante\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\Sergio\Dropbox\Programacion juegos\Juego Gigante\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.229 seconds
-Platform assembly: C:\Users\Sergio\Dropbox\Programacion juegos\Juego Gigante\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Sergio\Dropbox\Programacion juegos\Juego Gigante\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Programacion Juegos\Unity\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Programacion Juegos\Unity\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Programacion Juegos\Unity\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Programacion Juegos\Unity\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Programacion Juegos\Unity\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Programacion Juegos\Unity\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Programacion Juegos\Unity\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Programacion Juegos\Unity\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.355 seconds
+Platform assembly: C:\Programacion Juegos\Unity\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Programacion Juegos\Unity\JuegoDelGigante\Version1.0\ProyectoGigante\Ejecutable\ejecutable_Data\Managed\System.dll (this message is harmless)
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.961785 ms
+UnloadTime: 0.966498 ms
+ChocoConPared
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 86c -> priority: 1 
+  Thread -> id: 834 -> priority: 1 
